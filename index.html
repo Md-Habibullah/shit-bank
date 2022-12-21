@@ -31,19 +31,19 @@
             <div class="col-md-4">
                 <div class="box box-1">
                     <h5>Deposite</h5>
-                    <h2>$ 00</h2>
+                    <h2>$ <span id="currentDeposite">00</span></h2>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="box box-2">
                     <h5>Withdraw</h5>
-                    <h2>$ 00</h2>
+                    <h2>$ <span id="currentWithdraw">00</span></h2>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="box box-3">
                     <h5>Balance</h5>
-                    <h2>$ 1300</h2>
+                    <h2>$ <span id="currentBalance">1300</span></h2>
                 </div>
             </div>
         </div>
@@ -52,26 +52,75 @@
                 <div class="d-box">
                     <h2>Deposite</h2>
                     <br>
-                    <input type="number" class="form-control"><br><button class="btn btn-success">Deposite</button>
+                    <input id="depositeNum" type="number" class="form-control" placeholder="$ enter the amount"><br><button class="btn btn-success" id="deposite">Deposite</button>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="d-box">
                     <h2>Withdraw</h2>
                     <br>
-                    <input type="number"    class="form-control"><br><button class="btn btn-success">Withdraw</button>
+                    <input id="withdraw" type="number" class="form-control" placeholder="$ enter the amount"><br><button class="btn btn-success" id="withdrawBtn">Withdraw</button>
                 </div>
             </div>
         </div>
     </div>
     
     <script>
+
+        //login btn handle
+
         let btn = document.getElementById('btn');
         btn.addEventListener('click', function(e){
             let hideItem = document.getElementById('main-items');
             hideItem.style.display = 'none';
             let addElement = document.getElementById('second-item');
             addElement.style.display = 'block'
+        })
+
+        //Deposite btn handle
+
+        let depositeBtn = document.getElementById('deposite')
+        depositeBtn.addEventListener('click', function(){
+            let inputValue = document.getElementById('depositeNum').value;
+            let inputValueNum = parseFloat(inputValue)
+
+            let currentDeposite = document.getElementById('currentDeposite').innerText;
+            let currentDepositeNum = parseFloat(currentDeposite);
+
+            let totalAmount = inputValueNum + currentDepositeNum;
+
+            document.getElementById('currentDeposite').innerText = totalAmount;
+            document.getElementById('depositeNum').value = "";
+
+            let currentBalance = document.getElementById('currentBalance').innerText;
+            let currentBalanceNum = parseFloat(currentBalance);
+
+            let totalBalance = inputValueNum + currentBalanceNum;
+
+            document.getElementById('currentBalance').innerText = totalBalance;
+        })
+
+        //Withdraw btn handle
+
+        let withdrawBtn = document.getElementById('withdrawBtn');
+        withdrawBtn.addEventListener('click', function(){
+            let inputWithdraw = document.getElementById('withdraw').value;
+            let inputWithdrawNum = parseFloat(inputWithdraw);
+
+            let currentWithdraw = document.getElementById('currentWithdraw').innerText;
+            let currentWithdrawNum = parseFloat(currentWithdraw);
+
+            let totalWithdraw = inputWithdrawNum + currentWithdrawNum;
+
+            document.getElementById('currentWithdraw').innerText = totalWithdraw;
+            document.getElementById('withdraw').value = "";
+
+            let currentBalance = document.getElementById('currentBalance').innerText;
+            let currentBalanceNum = parseFloat(currentBalance);
+
+            let totalBalance = currentBalanceNum - inputWithdrawNum;
+
+            document.getElementById('currentBalance').innerText = totalBalance;
         })
     </script>
 </body>
